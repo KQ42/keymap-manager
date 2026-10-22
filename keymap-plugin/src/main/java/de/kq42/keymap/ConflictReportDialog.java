@@ -183,7 +183,7 @@ public final class ConflictReportDialog extends DialogWrapper {
   private static final PluginId PLUGIN_ID = PluginId.getId("de.kq42.plugins.keymapmanager");
 
   /** The project's repository, linked from the About section (same URL as plugin.xml's description). */
-  private static final String SOURCE_URL = "https://github.com/stefan-huettemann/keymap-manager";
+  private static final String SOURCE_URL = "https://github.com/KQ42/keymap-manager";
 
   private final Project project;
   private Keymap keymap;   // the keymap the report currently previews (the combo selection)
@@ -1352,7 +1352,7 @@ public final class ConflictReportDialog extends DialogWrapper {
       html.append(aboutRow("Vendor",
         url != null && !url.isBlank() ? escape(vendor) + "&nbsp;&nbsp;" + anchor(url, url) : escape(vendor)));
     }
-    html.append(aboutRow("Source", anchor(SOURCE_URL, "github.com/stefan-huettemann/keymap-manager")));
+    html.append(aboutRow("Source", anchor(SOURCE_URL, "github.com/KQ42/keymap-manager")));
     html.append(aboutRow("Runs on", escape(IDE_NAME + " " + ide.getFullVersion())
       + gray("build " + ide.getBuild().asString())));
     html.append(aboutRow("Runtime", escape(property("java.runtime.version"))

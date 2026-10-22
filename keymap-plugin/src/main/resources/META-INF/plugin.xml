@@ -51,7 +51,7 @@
     DE</b> keymap under <b>Settings &rarr; Keymap</b> to start from bindings
     that are actually reachable on that layout.
     <br/><br/>
-    <b>macOS only.</b> Source: <a href="https://github.com/stefan-huettemann/keymap-manager">github.com/stefan-huettemann/keymap-manager</a>
+    <b>macOS only.</b> Source: <a href="https://github.com/KQ42/keymap-manager">github.com/KQ42/keymap-manager</a>
   ]]></description>
 
   <change-notes><![CDATA[
