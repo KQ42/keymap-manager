@@ -1,4 +1,4 @@
-package de.civa.keymap;
+package de.kq42.keymap;
 
 import javax.swing.KeyStroke;
 import java.awt.event.InputEvent;

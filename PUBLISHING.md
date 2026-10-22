@@ -1,6 +1,6 @@
 # Publishing to the JetBrains Marketplace
 
-How to register and release **Keymap Manager** (`de.civa.plugins.keymapmanager`) on the
+How to register and release **Keymap Manager** (`de.kq42.plugins.keymapmanager`) on the
 [JetBrains Marketplace](https://plugins.jetbrains.com). All Gradle commands run from `keymap-plugin/`.
 
 ## What's already set up
@@ -23,7 +23,7 @@ How to register and release **Keymap Manager** (`de.civa.plugins.keymapmanager`)
 1. **JetBrains Account** — sign in at <https://account.jetbrains.com> (the same account used for the IDE).
 2. **Marketplace sign-in** — sign in at <https://plugins.jetbrains.com>; on the first upload you must accept
    the **Marketplace Developer Agreement**.
-3. **(Optional) Vendor profile** — to list the plugin under an organization ("CIVA") rather than your
+3. **(Optional) Vendor profile** — to list the plugin under an organization ("KQ42") rather than your
    personal name, create a Vendor on Marketplace and publish under it. This should match the `<vendor>` in
    `plugin.xml`.
 

@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.18.1"
 }
 
-group = "de.civa"
+group = "de.kq42"
 version = "1.8.0"
 
 tasks.withType<JavaCompile> {

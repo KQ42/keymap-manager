@@ -1,7 +1,7 @@
 <idea-plugin>
-  <id>de.civa.plugins.keymapmanager</id>
+  <id>de.kq42.plugins.keymapmanager</id>
   <name>Keymap Manager</name>
-  <vendor email="stefan.huettemann@civa.de" url="https://civa.de">CIVA</vendor>
+  <vendor email="stefan.huettemann@kq42.de" url="https://kq42.de/plugins/keymap-manager">KQ42</vendor>
 
   <description><![CDATA[
     <b>Keymap Manager</b> — a macOS-focused keymap manager. It finds where
@@ -91,8 +91,8 @@
   </extensions>
 
   <actions>
-    <action id="de.civa.keymap.ShowConflictReport"
-            class="de.civa.keymap.ShowConflictReportAction"
+    <action id="de.kq42.keymap.ShowConflictReport"
+            class="de.kq42.keymap.ShowConflictReportAction"
             text="Keymap Manager…"
             description="Manage keymaps and resolve shortcut conflicts with macOS and within the keymap">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
@@ -100,9 +100,9 @@
   </actions>
 
   <applicationListeners>
-    <listener class="de.civa.keymap.NationalLayoutCheck"
+    <listener class="de.kq42.keymap.NationalLayoutCheck"
               topic="com.intellij.openapi.keymap.KeymapManagerListener"/>
-    <listener class="de.civa.keymap.NationalLayoutCheck"
+    <listener class="de.kq42.keymap.NationalLayoutCheck"
               topic="com.intellij.ide.AppLifecycleListener"/>
   </applicationListeners>
 </idea-plugin>

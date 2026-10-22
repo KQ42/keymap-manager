@@ -1,4 +1,4 @@
-package de.civa.keymap;
+package de.kq42.keymap;
 
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;

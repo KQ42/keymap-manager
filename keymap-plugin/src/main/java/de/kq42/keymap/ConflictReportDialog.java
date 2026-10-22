@@ -1,4 +1,4 @@
-package de.civa.keymap;
+package de.kq42.keymap;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.BrowserUtil;
@@ -182,7 +182,7 @@ public final class ConflictReportDialog extends DialogWrapper {
    *  descriptor, so they can never drift from {@code plugin.xml} / {@code build.gradle.kts}. Looked up by
    *  id rather than via {@code PluginManager.getPluginByClass}, which returns null when the IDE itself runs
    *  from sources. Must stay in sync with {@code <id>} in plugin.xml. */
-  private static final PluginId PLUGIN_ID = PluginId.getId("de.civa.plugins.keymapmanager");
+  private static final PluginId PLUGIN_ID = PluginId.getId("de.kq42.plugins.keymapmanager");
 
   /** The project's repository, linked from the About section (same URL as plugin.xml's description). */
   private static final String SOURCE_URL = "https://github.com/stefan-huettemann/keymap-manager";
