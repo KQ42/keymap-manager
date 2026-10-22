@@ -1,6 +1,7 @@
 # Upload docs/website/ to kq42.de (Strato). The SFTP login lands in the doc root (/kq42).
-# Run from the repo root; password auth, so BatchMode must be turned off *before* -b:
-#   sftp -oBatchMode=no -b docs/website.sftp stu800282259@527705.ssh.w1.strato.hosting
+# Run from the repo root. Password auth: BatchMode must be off *before* -b, and pubkey auth off,
+# because the 1Password agent offers 6 keys and Strato closes the connection after the 6th try:
+#   sftp -oPubkeyAuthentication=no -oBatchMode=no -b docs/website.sftp stu800282259@527705.ssh.w1.strato.hosting
 # A leading "-" lets a command fail without aborting (mkdir of an existing folder).
 lcd docs/website
 -mkdir assets
