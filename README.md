@@ -2,7 +2,7 @@
 
 Development workspace for JetBrains IDE plugins.
 
-**Repository:** https://github.com/stefan-huettemann/keymap-manager
+**Repository:** https://github.com/KQ42/keymap-manager
 
 ## Plugins
 

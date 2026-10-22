@@ -23,4 +23,4 @@ On a German (T1) layout, dozens of stock IntelliJ shortcuts are physically unpre
 
 **macOS-focused.** Report wording adapts to the host IDE (IntelliJ IDEA, PyCharm, GoLand, Android Studio, …).
 
-**Source code:** [github.com/stefan-huettemann/keymap-manager](https://github.com/stefan-huettemann/keymap-manager)
+**Source code:** [github.com/KQ42/keymap-manager](https://github.com/KQ42/keymap-manager)

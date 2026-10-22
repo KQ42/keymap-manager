@@ -66,7 +66,9 @@ All resolved by Stefan, 2026-10-22:
   once uploaded), action ID `de.civa.keymap.ShowConflictReport` →
   `de.kq42.keymap.ShowConflictReport` (users' keymaps store it, so it must not
   change after release), Java package `de.civa.keymap` → `de.kq42.keymap`, Gradle
-  `group`. The source URL stays the personal GitHub repo. The vendor URL is
+  `group`. The source URL first stayed the personal GitHub repo; on 2026-10-22
+  the repo moved to the **KQ42 org** (`github.com/KQ42/keymap-manager`, old URLs
+  redirect), commits there use the `@kq42.de` email. The vendor URL is
   live over HTTPS since 2026-10-22, together with `/impressum/` and `/datenschutz/`
   (site source `docs/website/`, upload `docs/website.sftp`).
 - **D2 — 1.8.0.** Continues the internal numbering, with a minor bump over the
