@@ -9,14 +9,20 @@ How to register and release **Keymap Manager** (`de.kq42.plugins.keymapmanager`)
   an in-IDE `<description>` (purpose + usage, shown in Settings → Plugins — not marketing copy),
   `<change-notes>`, and `<idea-version since-build="261">` (no `until-build`, so it stays compatible with
   future IDEs).
-- **Marketplace listing copy** in [`docs/marketplace-description.html`](docs/marketplace-description.html) —
-  paste this into the Marketplace listing's Description field (edited independently of plugin.xml after the
-  first upload); it's the "why install this" pitch, not the in-IDE help text.
+- **Marketplace listing copy** in [`docs/marketplace-description.md`](docs/marketplace-description.md) —
+  the Marketplace Description field takes **Markdown**; paste the whole file. It's the "why install this"
+  pitch, not the in-IDE help text. It only stays independent of `plugin.xml` because the listing's
+  *General Information → Preserve changes from UI* is set to **Use changes from UI**: with the default
+  (*Use data from plugin.xml*) every upload overwrites the Description with `plugin.xml`'s `<description>`.
+- **Listing fields set on the web** (Marketplace → plugin → Overview → Edit Section; not in `plugin.xml`):
+  tags *Productivity* + *OS Integration*, privacy policy `https://kq42.de/datenschutz/`, copyright
+  `© 2026 KQ42`, documentation URL `https://kq42.de/plugins/keymap-manager/`, bug tracker = GitHub issues,
+  and a plain-text *Getting Started* (that field renders no Markdown).
 - **Icon**: `pluginIcon.svg` + `pluginIcon_dark.svg` in `META-INF/`.
 - **Gradle publishing**: `publishPlugin` reads a Marketplace token from `PUBLISH_TOKEN`; optional author
   signing (`signPlugin`) activates only when the signing env vars are present.
-- **Compatibility**: `verifyPlugin` is pinned to a concrete IDE and last reported *Compatible* with zero
-  API warnings.
+- **Compatibility**: `verifyPlugin` checks the latest build of every supported major version plus the
+  current EAP, selected on each run (`./gradlew printProductsReleases` lists them).
 
 ## Prerequisites (one-time)
 
@@ -49,9 +55,10 @@ with `publishPlugin`.
    that only JetBrains assigns — ask the reviewers for it, since the plugin bundles a keymap.
 4. Submit. Marketplace runs its automated Plugin Verifier and a reviewer checks the submission
    (typically ~2 business days). Once approved, the plugin page goes public.
-5. Paste [`docs/marketplace-description.html`](docs/marketplace-description.html) into the listing's
-   Description field (Marketplace → your plugin → Edit) — independent of plugin.xml, so it won't
-   happen automatically.
+5. In the listing (Marketplace → your plugin → Overview), set *Preserve changes from UI* to **Use
+   changes from UI** first, then paste [`docs/marketplace-description.md`](docs/marketplace-description.md)
+   into the Description and fill in the other web-only fields listed above. (Done for 1.8.x on
+   2026-10-22, before approval — the fields are editable while the plugin is under review.)
 
 ## Subsequent releases — automated
 
@@ -91,7 +98,7 @@ generating the key/chain.
 - [ ] `<change-notes>` updated in `plugin.xml`
 - [ ] `./gradlew buildPlugin verifyPlugin` → **Compatible**
 - [ ] First release: uploaded on the web and approved · Updates: `publishPlugin` with `PUBLISH_TOKEN`
-- [ ] `docs/marketplace-description.html` still matches reality; re-paste into the listing if it changed
+- [ ] `docs/marketplace-description.md` still matches reality; re-paste into the listing if it changed
 - [ ] Git tag / commit for the released version
 
 ## References

@@ -44,7 +44,7 @@ Resolved: **D0 name** — "Keymap Manager" is distinct on the Marketplace (§2).
 | 2 | Apply D1: vendor, plugin ID, action ID, Java packages, `LICENSE` → KQ42 | D1 | ☑ 2026-10-22 |
 | 3 | Apply D2: `version` in `build.gradle.kts`, ZIP names in README/INSTALL/CLAUDE.md | D2 | ☑ 2026-10-22 |
 | 4 | Rewrite `<change-notes>` as a first-release feature summary (no "up to 1.6.1" fix story) | D2 | ☑ 2026-10-22 |
-| 5 | Fix stale "↩ ⎋ ⌫ ⇥ Space" wording in README + `docs/marketplace-description.html` (only ↩ ⎋ ⇥ need radios since `2b295d2`) | — | ☑ 2026-10-22 |
+| 5 | Fix stale "↩ ⎋ ⌫ ⇥ Space" wording in README + `docs/marketplace-description.html` (now `.md`; only ↩ ⎋ ⇥ need radios since `2b295d2`) | — | ☑ 2026-10-22 |
 | 6 | Housekeeping: spec 0003 → Implemented; BACKLOG pre-publish note → points here | — | ☑ 2026-10-22 |
 | 7 | `buildPlugin` + `verifyPlugin` → *Compatible*; `validate_keymap.py` on the shipped copy | 2–5 | ☑ 2026-10-22 (re-run for KQ42) |
 | 8 | Manual smoke test of the built ZIP (uninstall old copy first; rebind arrows/Space/⌫; ⌘V on MacBook Pro DE; import/export) | 7 | ☑ 2026-10-22 (Stefan; re-run for KQ42 and for 1.8.1) |
@@ -84,5 +84,13 @@ All resolved by Stefan, 2026-10-22:
   (`FileEditorManager.openFile`) — invisible locally because `verifyPlugin` only
   targeted 2026.1.4. All replaced with public API; `verifyPlugin` now also targets
   2026.2.3 and was clean on the 263 EAP too. Ships as 1.8.1.
+- **Listing (2026-10-22, during review):** *Preserve changes from UI* → **Use changes
+  from UI** (option A: Marketplace shows the pitch, the IDE keeps the usage help;
+  the default would overwrite the Description from `plugin.xml` on every upload).
+  Description pasted from `docs/marketplace-description.md` (Markdown — the field
+  renders it; the earlier `.html` copy is gone), tags Productivity + OS
+  Integration, privacy policy, copyright, documentation URL, bug tracker, and a
+  plain-text Getting Started. Filled in by Claude through a throwaway Chrome
+  profile Stefan logged into.
 - **D4 — no author signing.** Marketplace signs on its side; revisit for later
   releases if wanted.
