@@ -1,4 +1,5 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 
 plugins {
     id("java")
@@ -44,17 +45,16 @@ intellijPlatform {
     }
 
     pluginVerification {
-        // flags @ApiStatus.Internal / impl-package usage and deprecations against the target IDE.
-        // Pinned explicitly (recommended() resolves empty for the very new 261 build) and via the
-        // Maven repo (useInstaller = false) because the installer URL doesn't resolve for this version.
+        // The latest build of every IDE major version the plugin supports, oldest to newest, plus the
+        // current EAP — picked from JetBrains' release feed on each run, so "newest" never goes stale.
+        // The oldest one proves we use no API younger than sinceBuild; the newest ones catch what later
+        // versions make internal, deprecate or remove (1.8.0 shipped such usages because only 2026.1
+        // was checked). Same filter as printProductsReleases below, which lists the selection.
         ides {
-            create(IntelliJPlatformType.IntellijIdeaCommunity, "2026.1.4") {
-                useInstaller = false
-            }
-            // the latest stable too: 2026.2 turned the PluginManager lookups internal, which the
-            // 2026.1 target alone can't see (Marketplace flagged them on the first upload)
-            create(IntelliJPlatformType.IntellijIdea, "2026.2.3") {
-                useInstaller = false
+            select {
+                types = listOf(IntelliJPlatformType.IntellijIdea)
+                channels = listOf(ProductRelease.Channel.RELEASE, ProductRelease.Channel.EAP)
+                sinceBuild = "261"
             }
         }
     }
@@ -75,4 +75,11 @@ intellijPlatform {
             password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
         }
     }
+}
+
+tasks.printProductsReleases {
+    // ./gradlew printProductsReleases — the IDE builds verifyPlugin checks against
+    types = listOf(IntelliJPlatformType.IntellijIdea)
+    channels = listOf(ProductRelease.Channel.RELEASE, ProductRelease.Channel.EAP)
+    sinceBuild = "261"
 }
