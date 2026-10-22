@@ -77,5 +77,12 @@ All resolved by Stefan, 2026-10-22:
   `/api/tags` marks Keymap as **privileged** (JetBrains-assigned, like `Theme` or
   `bundled`), so the upload form doesn't offer it. Ask the reviewers or
   marketplace@jetbrains.com to add it, since the plugin bundles a keymap.
+- **1.8.1 (2026-10-22, after the 1.8.0 upload).** Marketplace's verifier ran 1.8.0
+  against 2026.2.3 and the 2026.3 EAP and reported 2 internal-API usages
+  (`PluginManager.findEnabledPlugin`, `getPluginByClass`), 1 scheduled-for-removal
+  (`SimpleListCellRenderer.create`) and, on the EAP, 1 deprecated
+  (`FileEditorManager.openFile`) — invisible locally because `verifyPlugin` only
+  targeted 2026.1.4. All replaced with public API; `verifyPlugin` now also targets
+  2026.2.3 and was clean on the 263 EAP too. Ships as 1.8.1.
 - **D4 — no author signing.** Marketplace signs on its side; revisit for later
   releases if wanted.

@@ -55,6 +55,8 @@
   ]]></description>
 
   <change-notes><![CDATA[
+    <p><b>1.8.1</b> — uses only public IDE APIs, so it keeps working on
+       2026.2 and later.</p>
     <p><b>1.8.0 — first public release.</b></p>
     <ul>
       <li><b>Conflict report</b> (Tools &rarr; Keymap Manager…) for any installed

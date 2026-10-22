@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.kq42"
-version = "1.8.0"
+version = "1.8.1"
 
 tasks.withType<JavaCompile> {
     // platform 261+ runs on JBR 21; class files built with the local JDK 17 load fine there
@@ -49,6 +49,11 @@ intellijPlatform {
         // Maven repo (useInstaller = false) because the installer URL doesn't resolve for this version.
         ides {
             create(IntelliJPlatformType.IntellijIdeaCommunity, "2026.1.4") {
+                useInstaller = false
+            }
+            // the latest stable too: 2026.2 turned the PluginManager lookups internal, which the
+            // 2026.1 target alone can't see (Marketplace flagged them on the first upload)
+            create(IntelliJPlatformType.IntellijIdea, "2026.2.3") {
                 useInstaller = false
             }
         }

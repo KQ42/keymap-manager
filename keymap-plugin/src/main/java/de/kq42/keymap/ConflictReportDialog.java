@@ -3,8 +3,7 @@ package de.kq42.keymap;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.IdeEventQueue;
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManager;
+import com.intellij.ide.plugins.cl.PluginAwareClassLoader;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ApplicationNamesInfo;
@@ -26,8 +25,9 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.fileChooser.FileSaverDescriptor;
 import com.intellij.openapi.fileChooser.FileSaverDialog;
+import com.intellij.openapi.extensions.PluginDescriptor;
 import com.intellij.openapi.extensions.PluginId;
-import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.KeymapManagerListener;
@@ -178,10 +178,8 @@ public final class ConflictReportDialog extends DialogWrapper {
    *  into user-facing text wherever the {@code {ide}} token appears. */
   private static final String IDE_NAME = ApplicationNamesInfo.getInstance().getFullProductName();
 
-  /** This plugin's own id — the help dialog's About section reads name/version/vendor from the matching
-   *  descriptor, so they can never drift from {@code plugin.xml} / {@code build.gradle.kts}. Looked up by
-   *  id rather than via {@code PluginManager.getPluginByClass}, which returns null when the IDE itself runs
-   *  from sources. Must stay in sync with {@code <id>} in plugin.xml. */
+  /** This plugin's own id, shown in the help dialog's About section. Must stay in sync with {@code <id>}
+   *  in plugin.xml. */
   private static final PluginId PLUGIN_ID = PluginId.getId("de.kq42.plugins.keymapmanager");
 
   /** The project's repository, linked from the About section (same URL as plugin.xml's description). */
@@ -1331,12 +1329,15 @@ public final class ConflictReportDialog extends DialogWrapper {
    * JetBrains Runtime exposed the macOS shortcut table to {@link ConflictScan} (no scan without it), and
    * whether national keyboard layout support is on (without which German-layout bindings never fire —
    * the very thing {@link NationalLayoutCheck} warns about).
-   * <p>The plugin's own facts come from its {@link IdeaPluginDescriptor}, so the version can never drift
+   * <p>The plugin's own facts come from its {@link PluginDescriptor}, so the version can never drift
    * from the one in {@code build.gradle.kts}; environment facts come from plain system properties rather
    * than {@code SystemInfo}, whose constants the platform marks obsolete.
    */
   private String aboutHtml() {
-    IdeaPluginDescriptor plugin = PluginManager.getInstance().findEnabledPlugin(PLUGIN_ID);
+    // Our own descriptor, via the class loader that loaded this class: PluginAwareClassLoader's accessors
+    // are public API, while every PluginManager lookup (findEnabledPlugin, getPlugin, …) is internal as of 2026.2.
+    PluginDescriptor plugin = ConflictReportDialog.class.getClassLoader() instanceof PluginAwareClassLoader loader
+                              ? loader.getPluginDescriptor() : null;
     ApplicationInfo ide = ApplicationInfo.getInstance();
     // A two-column table rather than the detail pane's factRow(): nine facts read far better on an
     // aligned label column, and letting the table auto-size it keeps that free of pixel guesses.
@@ -1638,7 +1639,9 @@ public final class ConflictReportDialog extends DialogWrapper {
   private void openOrNotify(File file) {
     VirtualFile vf = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(file);
     if (project != null && vf != null && "xml".equalsIgnoreCase(vf.getExtension())) {
-      FileEditorManager.getInstance(project).openFile(vf, true);
+      // OpenFileDescriptor.navigate, not FileEditorManager.openFile: 2026.3 deprecates every blocking
+      // openFile variant, and the non-blocking replacements are experimental suspend functions.
+      new OpenFileDescriptor(project, vf).navigate(true);
     }
     else {
       Messages.showInfoMessage(project, "Saved to:\n" + file.getAbsolutePath(), "Export Complete");
@@ -1906,8 +1909,12 @@ public final class ConflictReportDialog extends DialogWrapper {
       items.add(null);  // the placeholder — selected (and required to be replaced) when parent is unresolved
       items.addAll(installed);
       parentCombo.setModel(new DefaultComboBoxModel<>(items.toArray(new Keymap[0])));
-      parentCombo.setRenderer(SimpleListCellRenderer.create(SELECT_PARENT,
-        k -> k == null ? SELECT_PARENT : k.getPresentableName() + " " + sourceTag(k)));
+      parentCombo.setRenderer(new SimpleListCellRenderer<>() {
+        @Override
+        public void customize(JList<? extends Keymap> list, Keymap k, int index, boolean selected, boolean focused) {
+          setText(k == null ? SELECT_PARENT : k.getPresentableName() + " " + sourceTag(k));
+        }
+      });
       parentCombo.setSelectedItem(resolved);  // null → the placeholder
 
       FormBuilder form = FormBuilder.createFormBuilder()

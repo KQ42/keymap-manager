@@ -1,6 +1,6 @@
 package de.kq42.keymap;
 
-import com.intellij.ide.plugins.PluginManager;
+import com.intellij.ide.plugins.cl.PluginAwareClassLoader;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.KeyboardShortcut;
@@ -203,10 +203,15 @@ final class ConflictScan {
     return result;
   }
 
-  /** Which plugin provides an action — "IDE" for the platform core, else the plugin's name, or null. */
+  /** Which plugin provides an action — "IDE" for the platform core, else the plugin's name, or null.
+   *  Read off the action's class loader: every plugin (and platform content module) class is loaded by a
+   *  {@link PluginAwareClassLoader}, whose descriptor accessors are public API — unlike
+   *  {@code PluginManager.getPluginByClass}, which 2026.2 marks internal. Anything else (the platform's
+   *  boot class loader) is the IDE itself. */
   private static @Nullable String sourceOf(AnAction action) {
     try {
-      PluginDescriptor plugin = PluginManager.getPluginByClass(action.getClass());
+      if (!(action.getClass().getClassLoader() instanceof PluginAwareClassLoader loader)) return "IDE";
+      PluginDescriptor plugin = loader.getPluginDescriptor();
       if (plugin == null) return null;
       return "com.intellij".equals(plugin.getPluginId().getIdString()) ? "IDE" : plugin.getName();
     }
