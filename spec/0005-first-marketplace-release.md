@@ -47,7 +47,7 @@ Resolved: **D0 name** — "Keymap Manager" is distinct on the Marketplace (§2).
 | 5 | Fix stale "↩ ⎋ ⌫ ⇥ Space" wording in README + `docs/marketplace-description.html` (only ↩ ⎋ ⇥ need radios since `2b295d2`) | — | ☑ 2026-10-22 |
 | 6 | Housekeeping: spec 0003 → Implemented; BACKLOG pre-publish note → points here | — | ☑ 2026-10-22 |
 | 7 | `buildPlugin` + `verifyPlugin` → *Compatible*; `validate_keymap.py` on the shipped copy | 2–5 | ☑ 2026-10-22 (re-run for KQ42) |
-| 8 | Manual smoke test of the built ZIP (uninstall old copy first; rebind arrows/Space/⌫; ⌘V on MacBook Pro DE; import/export) | 7 | ☐ re-run after the KQ42 switch |
+| 8 | Manual smoke test of the built ZIP (uninstall old copy first; rebind arrows/Space/⌫; ⌘V on MacBook Pro DE; import/export) | 7 | ☑ 2026-10-22 (Stefan, re-run for KQ42) |
 | 9 | First upload via the web (manual moderation, ~2 business days); paste listing description | 8 | ☐ |
 | 10 | Tag the released commit; flip this spec to Implemented | 9 | ☐ |
 
