@@ -66,8 +66,9 @@ All resolved by Stefan, 2026-10-22:
   once uploaded), action ID `de.civa.keymap.ShowConflictReport` →
   `de.kq42.keymap.ShowConflictReport` (users' keymaps store it, so it must not
   change after release), Java package `de.civa.keymap` → `de.kq42.keymap`, Gradle
-  `group`. The source URL stays the personal GitHub repo. The vendor URL must
-  serve HTTPS before upload.
+  `group`. The source URL stays the personal GitHub repo. The vendor URL is
+  live over HTTPS since 2026-10-22, together with `/impressum/` and `/datenschutz/`
+  (site source `docs/website/`, upload `docs/website.sftp`).
 - **D2 — 1.8.0.** Continues the internal numbering, with a minor bump over the
   1.7.0 ZIP for the every-key rebind capture (`2b295d2`). The change-notes are
   still rewritten as a first-release summary, since nobody saw 1.7.0.
