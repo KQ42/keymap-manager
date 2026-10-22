@@ -31,7 +31,7 @@ in the 1.7.0 change-notes means "version bump", not "published".
 |---|---|---|
 | D1 | Vendor, and with it the **plugin ID** (permanent once published), `LICENSE` holder and source URL | **KQ42** — ID `de.kq42.plugins.keymapmanager` (revised 2026-10-22) |
 | D2 | Version number of the first public release | **1.8.0** |
-| D3 | Marketplace category (license: MIT, already in `LICENSE`) | **Keymap** |
+| D3 | Marketplace tags (license: MIT, already in `LICENSE`) | **Productivity**, **OS Integration** (Keymap is privileged) |
 | D4 | Author-sign the ZIP, or rely on Marketplace signing | **Marketplace signing** |
 
 Resolved: **D0 name** — "Keymap Manager" is distinct on the Marketplace (§2).
@@ -72,7 +72,10 @@ All resolved by Stefan, 2026-10-22:
 - **D2 — 1.8.0.** Continues the internal numbering, with a minor bump over the
   1.7.0 ZIP for the every-key rebind capture (`2b295d2`). The change-notes are
   still rewritten as a first-release summary, since nobody saw 1.7.0.
-- **D3 — category "Keymap".** The tag the platform keymaps and "Keymap
-  Nationalizer" carry (verified via the Marketplace API).
+- **D3 — tags Productivity + OS Integration** (corrected the same day). The first
+  answer, "Keymap", came from the tags other keymap plugins carry; but
+  `/api/tags` marks Keymap as **privileged** (JetBrains-assigned, like `Theme` or
+  `bundled`), so the upload form doesn't offer it. Ask the reviewers or
+  marketplace@jetbrains.com to add it, since the plugin bundles a keymap.
 - **D4 — no author signing.** Marketplace signs on its side; revisit for later
   releases if wanted.

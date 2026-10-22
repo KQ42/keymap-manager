@@ -44,8 +44,9 @@ with `publishPlugin`.
 
 1. Go to <https://plugins.jetbrains.com> → your profile → **Upload plugin**.
 2. Upload `keymap-plugin/build/distributions/Keymap-Manager-<version>.zip`.
-3. Set the **License** (MIT, per `LICENSE`) and pick the **Category** *Keymap* — the one the platform
-   keymaps use ([spec 0005](spec/0005-first-marketplace-release.md) D3; editable later).
+3. Set the **License** (MIT, per `LICENSE`) and pick the **Tags** *Productivity* and *OS Integration*
+   ([spec 0005](spec/0005-first-marketplace-release.md) D3; editable later). *Keymap* is a privileged tag
+   that only JetBrains assigns — ask the reviewers for it, since the plugin bundles a keymap.
 4. Submit. Marketplace runs its automated Plugin Verifier and a reviewer checks the submission
    (typically ~2 business days). Once approved, the plugin page goes public.
 5. Paste [`docs/marketplace-description.html`](docs/marketplace-description.html) into the listing's
