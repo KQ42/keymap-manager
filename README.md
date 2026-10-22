@@ -29,8 +29,8 @@ Open it from **Tools → Keymap Manager…** or Find Action.
 - **Fix it in place** — **rebind**, **remove**, or **revert** to the parent keymap's binding,
   for one action, several at once, or a whole category. Works on the keymap's own bindings
   *and* on the ones it inherits; a read-only keymap gets an editable copy automatically. The
-  rebind field captures a real keypress — even IDE-bound combos like ⌃X — offers the keys you
-  can't press into a field (↩ ⎋ ⌫ ⇥ Space), supports German keys (Ä Ö Ü ß), flags macOS
+  rebind field captures any key you press — arrows, Space, ⌫, F-keys, even IDE-bound combos
+  like ⌃X — offers ↩ ⎋ ⇥ as options (they operate the dialog itself), supports German keys (Ä Ö Ü ß), flags macOS
   overlaps and existing bindings as you type, and can **suggest** a free (or least-conflicting)
   shortcut for you.
 - **Review what changed** — **Modified shortcuts** shows what a keymap declares itself (its
@@ -62,7 +62,7 @@ Studio, …).*
 ```bash
 cd keymap-plugin
 ./gradlew buildPlugin
-# → build/distributions/Keymap-Manager-1.7.0.zip
+# → build/distributions/Keymap-Manager-1.8.0.zip
 ```
 
 Installation and settings-sync setup: [`keymap-plugin/INSTALL.md`](keymap-plugin/INSTALL.md)

@@ -55,30 +55,29 @@
   ]]></description>
 
   <change-notes><![CDATA[
-    <p><b>1.7.0 — important fix to the bundled MacBook Pro DE keymap.</b>
-       Up to 1.6.1 it carried Windows/Linux modifiers for 90 actions:
-       <b>Paste was ⌃V instead of ⌘V</b>, and so were Cut, Select All, Save All,
-       Find Action, Reformat Code, Duplicate Line, Recent Files and 83 more.
-       They are now the standard macOS bindings. The keymap only deviates from
-       the stock macOS keymap where a German (T1) layout leaves a key
-       unpressable, or where macOS itself claims the combo — 58 shortcuts in
-       total. If you customised shortcuts on top of this keymap your own
-       changes are kept; everything you did not change now follows macOS.</p>
+    <p><b>1.8.0 — first public release.</b></p>
     <ul>
-      <li>Conflict report with per-conflict advice, in-place rebind/remove, and
-          XML export.</li>
-      <li><b>Import a keymap from XML</b> (gear menu → Import…): validates the
-          file, resolves a name clash, and lets you pick a parent when the file's
-          declared parent isn't installed. Imported keymaps can be deleted again.</li>
-      <li><b>Filter the report by action name</b>: a search field beside the
-          keymap selector narrows every section live; section counts show
-          "matched of total", and an empty result explains itself.</li>
-      <li>The in-IDE help (?) now ends with an <b>About</b> section: plugin
-          version, vendor and source, the IDE / JVM / OS it runs on, and whether
-          the macOS scan and national keyboard layouts are available — copy it
-          into a bug report.</li>
+      <li><b>Conflict report</b> (Tools &rarr; Keymap Manager…) for any installed
+          keymap: shortcuts macOS claims for itself, overlaps the IDE doesn't
+          flag, and double-bound keys — each explained, with tailored advice.</li>
+      <li><b>Fix in place</b>: rebind, remove, or revert to the parent's binding —
+          for one action, several, or a whole category, on own <i>and</i>
+          inherited bindings; also from a row's right-click menu. A read-only
+          keymap gets an editable copy automatically.</li>
+      <li>The <b>rebind field captures any key</b> — arrows, Space, ⌫, F-keys,
+          German keys (Ä Ö Ü ß), even IDE-bound combos like ⌃X — warns about
+          macOS overlaps and existing bindings as you type, and can
+          <b>suggest</b> a free shortcut.</li>
+      <li><b>Modified</b> and <b>Inherited shortcuts</b> views, a <b>Show modified
+          only</b> toggle, optional action ids and defining keymap, and a
+          <b>filter</b> by action name.</li>
+      <li><b>Manage keymaps</b> (activate, duplicate, rename, delete) and
+          <b>import / export</b> them as XML.</li>
+      <li>Shortcuts shown as <b>keycaps</b>, matching Settings &rarr; Keymap; an
+          <b>About</b> section in the help (?) lists what a bug report needs.</li>
       <li>Bundled <b>MacBook Pro DE</b> keymap for the German (T1) MacBook Pro
-          layout.</li>
+          layout: the stock macOS keymap, changed only where the layout leaves a
+          key unpressable or macOS claims the combo (58 actions).</li>
       <li>Report wording adapts to the host IDE (IntelliJ IDEA, PyCharm, GoLand,
           Android Studio, …).</li>
     </ul>

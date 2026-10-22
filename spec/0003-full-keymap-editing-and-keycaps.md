@@ -1,6 +1,6 @@
 # 0003 — Full keymap editing, inherited shortcuts, keycap rendering
 
-- **Status:** Accepted 2026-07-24 (supersedes the [0002](0002-plugin-scope-and-name.md) §2 "not a general tree editor" rudder)
+- **Status:** Implemented (shipped by 2026-08-05, see `git log`; accepted 2026-07-24) (supersedes the [0002](0002-plugin-scope-and-name.md) §2 "not a general tree editor" rudder)
 - **Source:** internal (`../wip/TODO.md`, user-authored)
 - **Date:** 2026-07-24
 

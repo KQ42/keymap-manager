@@ -48,7 +48,6 @@ only; keystroke-text matching stayed unscheduled (see 0004 §2).
 
 ---
 
-*Also parked, separately:* the plugin is still **pre-publish** — first release
-needs a version bump + refreshed `plugin.xml` change-notes, and the vendor choice
-(CIVA vs PulmoVention, [0002](0002-plugin-scope-and-name.md) Decision C) before
-the manual Marketplace upload. See `PUBLISHING.md`.
+*Release:* the plugin is still **pre-publish** — the path to the first
+Marketplace release, its baseline and open decisions live in
+[0005](0005-first-marketplace-release.md).
