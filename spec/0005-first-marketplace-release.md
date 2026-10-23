@@ -1,6 +1,6 @@
 # 0005 — First Marketplace release
 
-- **Status:** Accepted 2026-10-22 — the working plan towards the first public release
+- **Status:** Implemented 2026-10-23 — 1.8.1 approved and public on the Marketplace
 - **Source:** internal (project status assessment, 2026-10-22)
 - **Date:** 2026-10-22
 
@@ -48,8 +48,8 @@ Resolved: **D0 name** — "Keymap Manager" is distinct on the Marketplace (§2).
 | 6 | Housekeeping: spec 0003 → Implemented; BACKLOG pre-publish note → points here | — | ☑ 2026-10-22 |
 | 7 | `buildPlugin` + `verifyPlugin` → *Compatible*; `validate_keymap.py` on the shipped copy | 2–5 | ☑ 2026-10-22 (re-run for KQ42) |
 | 8 | Manual smoke test of the built ZIP (uninstall old copy first; rebind arrows/Space/⌫; ⌘V on MacBook Pro DE; import/export) | 7 | ☑ 2026-10-22 (Stefan; re-run for KQ42 and for 1.8.1) |
-| 9 | First upload via the web (manual moderation, ~2 business days); paste listing description | 8 | ◐ 1.8.0 + 1.8.1 uploaded 2026-10-22, in review |
-| 10 | Tag the released commit; flip this spec to Implemented | 9 | ☐ |
+| 9 | First upload via the web (manual moderation, ~2 business days); paste listing description | 8 | ☑ 1.8.1 approved 2026-10-23 |
+| 10 | Tag the released commit; flip this spec to Implemented | 9 | ☑ 2026-10-23 (`v1.8.1` → `11a5928`) |
 
 Post-release: backlog B3 (guided conflict resolution), B2 (compare keymaps).
 
@@ -96,3 +96,8 @@ All resolved by Stefan, 2026-10-22:
   profile Stefan logged into.
 - **D4 — no author signing.** Marketplace signs on its side; revisit for later
   releases if wanted.
+- **Released (2026-10-23).** JetBrains approved **1.8.1**; it is public at
+  `https://plugins.jetbrains.com/plugin/35397-keymap-manager` (numeric ID 35397).
+  Tagged `v1.8.1` on `11a5928`, the commit the uploaded ZIP was built from
+  (`f6f03a4` only changes verifier config). The later `2d44894` (source links →
+  KQ42 org) is **not** in 1.8.1 and ships with the next version.
