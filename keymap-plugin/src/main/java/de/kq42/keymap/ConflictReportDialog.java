@@ -1507,7 +1507,7 @@ public final class ConflictReportDialog extends DialogWrapper {
           "“Changes vs the parent keymap” cannot be serialized for this keymap on this runtime.", "Export Failed");
         return null;
       }
-      return JDOMUtil.writeElement(impl.writeScheme());  // <keymap ...> with the own <action> declarations
+      return JDOMUtil.writeElement(ConflictScan.ownXml(impl));  // <keymap ...> with the own <action> declarations
     }
     Map<String, Set<KeyboardShortcut>> byAction = switch (cat) {
       case CONFLICTS -> conflictShortcuts(true);
@@ -1578,7 +1578,7 @@ public final class ConflictReportDialog extends DialogWrapper {
     int level = 1;
     for (Keymap k = keymap; k != null; k = k.getParent(), level++) {
       if (k instanceof KeymapImpl impl) {
-        entries.put(String.format("%02d-%s.xml", level, sanitize(k.getName())), JDOMUtil.writeElement(impl.writeScheme()));
+        entries.put(String.format("%02d-%s.xml", level, sanitize(k.getName())), JDOMUtil.writeElement(ConflictScan.ownXml(impl)));
       }
     }
     if (entries.isEmpty()) {
@@ -1594,7 +1594,7 @@ public final class ConflictReportDialog extends DialogWrapper {
       case CONFLICTS -> (int) scan.keymapConflicts.stream().filter(ConflictReportDialog::needsAttention).count();
       case OVERLAPS -> (int) scan.keymapConflicts.stream().filter(c -> !needsAttention(c)).count();
       case DOUBLE_BINDS -> scan.internal.size();
-      case CHANGES -> keymap instanceof KeymapImpl impl ? impl.writeScheme().getChildren("action").size() : 0;
+      case CHANGES -> keymap instanceof KeymapImpl impl ? ConflictScan.ownXml(impl).getChildren("action").size() : 0;
     };
   }
 
@@ -2335,7 +2335,7 @@ public final class ConflictReportDialog extends DialogWrapper {
     return ownIdsCache.computeIfAbsent(k, kk -> {
       Set<String> ids = new HashSet<>();
       if (kk instanceof KeymapImpl impl) {
-        for (Object child : impl.writeScheme().getChildren("action")) {
+        for (Object child : ConflictScan.ownXml(impl).getChildren("action")) {
           String id = ((Element) child).getAttributeValue("id");
           if (id != null && !id.isEmpty()) ids.add(id);
         }

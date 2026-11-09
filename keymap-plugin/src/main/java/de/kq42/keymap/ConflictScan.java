@@ -10,6 +10,7 @@ import com.intellij.openapi.extensions.PluginDescriptor;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapUtil;
 import com.intellij.openapi.keymap.impl.KeymapImpl;
+import com.intellij.openapi.options.SchemeState;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 
@@ -168,12 +169,29 @@ final class ConflictScan {
     return result;
   }
 
+  /** {@link KeymapImpl#writeScheme()} without its side effect. Use this — never {@code writeScheme()} directly.
+   *
+   *  <p>{@code writeScheme()} is the platform's <i>save</i> serializer: besides building the XML it sets
+   *  {@code schemeState = UNCHANGED}, telling the scheme manager the keymap's file is up to date. The scheme
+   *  manager skips UNCHANGED schemes on save, so calling it on a live keymap after an edit (as every refresh
+   *  of the report did, for the Modified section and the {@code revertable} gate) silently cancelled the
+   *  save: the edited keymap never reached {@code keymaps/}, while {@code keymap.xml} still named it active,
+   *  so the next start reported it missing. Restoring the previous state keeps the keymap dirty. */
+  public static Element ownXml(KeymapImpl impl) {
+    SchemeState before = impl.schemeState;
+    try {
+      return impl.writeScheme();
+    } finally {
+      impl.schemeState = before;
+    }
+  }
+
   /** Bindings this keymap declares itself — its diff against the parent, via {@link KeymapImpl#writeScheme()}.
    *  Cleared inherited bindings are included (an empty own-declaration yields an empty shortcut list). */
   private static List<ModifiedBinding> modifiedBindings(Keymap keymap) {
     if (!(keymap instanceof KeymapImpl impl)) return List.of();
     List<String> ids = new ArrayList<>();
-    for (Object child : impl.writeScheme().getChildren("action")) {
+    for (Object child : ownXml(impl).getChildren("action")) {
       String id = ((Element) child).getAttributeValue("id");
       if (id != null && !id.isEmpty()) ids.add(id);
     }
